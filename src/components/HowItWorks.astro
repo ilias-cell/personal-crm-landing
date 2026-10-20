@@ -1,0 +1,23 @@
+---
+import { steps } from '../data/landing';
+import Section from './Section.astro';
+---
+
+<Section id="how" class="flex scroll-mt-15 flex-col gap-6 pt-18 lg:scroll-mt-18 lg:gap-12 lg:pt-40">
+  <h2
+    class="font-serif text-32 leading-[1.1] font-normal tracking-[-0.015em] lg:text-5xl lg:leading-[1.08] lg:tracking-[-0.02em]"
+  >
+    Как это работает
+  </h2>
+  <ol class="flex flex-col gap-7 lg:grid lg:grid-cols-3 lg:gap-12">
+    {
+      steps.map((step, index) => (
+        <li class="flex flex-col gap-1.5 lg:gap-2.5 lg:border-t-2 lg:border-ink lg:pt-5">
+          <div class="font-serif text-15 text-accent italic lg:text-17">Шаг {index + 1}</div>
+          <h3 class="font-serif text-22 lg:text-26">{step.title}</h3>
+          <p class="text-15 leading-[1.55] text-muted lg:text-base">{step.text}</p>
+        </li>
+      ))
+    }
+  </ol>
+</Section>

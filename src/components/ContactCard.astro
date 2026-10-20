@@ -1,0 +1,57 @@
+---
+import { card, cardPoints } from '../data/landing';
+import Section from './Section.astro';
+---
+
+<Section class="flex flex-col gap-6 pt-18 lg:gap-12 lg:pt-40">
+  <h2
+    class="font-serif text-32 leading-[1.1] font-normal tracking-[-0.015em] lg:text-5xl lg:leading-[1.08] lg:tracking-[-0.02em]"
+  >
+    Одна карточка на каждого человека
+  </h2>
+  <div class="flex flex-col gap-6 lg:grid lg:grid-cols-2 lg:items-start lg:gap-18">
+    <div
+      class="flex flex-col gap-3.5 rounded-card border border-line bg-surface p-5 lg:gap-5 lg:p-8 lg:shadow-card"
+    >
+      <div class="font-serif text-2xl lg:text-3xl">{card.name}</div>
+      <dl
+        class="grid grid-cols-[auto_minmax(0,1fr)] gap-x-4 gap-y-2.5 text-sm leading-[1.4] lg:gap-x-6 lg:gap-y-3 lg:text-15"
+      >
+        {
+          card.fields.map((field) => (
+            <>
+              <dt class="text-subtle">{field.label}</dt>
+              <dd>{field.value}</dd>
+            </>
+          ))
+        }
+      </dl>
+      <div class="flex flex-col gap-2.5 border-t border-line-soft pt-3.5 lg:gap-3 lg:pt-5">
+        <div class="text-xs text-subtle lg:text-13">{card.noteLabel}</div>
+        <div
+          class="rounded-control border border-line-input bg-input p-3 text-sm leading-normal lg:p-3.5 lg:text-15"
+        >
+          {card.noteText}
+        </div>
+        <div
+          class="flex h-10 items-center self-start rounded-control bg-ink px-4 text-sm font-medium text-paper lg:h-10.5 lg:px-4.5"
+        >
+          {card.saveLabel}
+        </div>
+      </div>
+    </div>
+    <ol>
+      {
+        cardPoints.map((point, index) => (
+          <li class="grid grid-cols-[--spacing(7)_minmax(0,1fr)] gap-2 border-t border-line py-4 last:border-b lg:grid-cols-[--spacing(10)_minmax(0,1fr)] lg:gap-3 lg:py-5.5">
+            <span class="font-serif text-17 text-accent lg:text-xl">{index + 1}</span>
+            <div class="flex flex-col gap-1 lg:gap-1.5">
+              <strong class="text-base font-semibold lg:text-lg">{point.title}</strong>
+              <span class="text-15 leading-normal text-muted lg:text-base lg:leading-[1.55]">{point.text}</span>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</Section>

@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.astro/
+.env
+.env.*
+!.env.example
+.DS_Store
+
+# viewer runtime of the design mockups: unknown license, handoff README says not to carry it into the project
+design/support.js

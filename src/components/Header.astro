@@ -1,0 +1,14 @@
+---
+import { HOW_ANCHOR } from '../data/landing';
+import AppButton from './AppButton.astro';
+---
+
+<header class="sticky top-0 z-10 border-b border-line-soft bg-paper/92 backdrop-blur-sm">
+  <div class="mx-auto flex h-15 max-w-mobile items-center justify-between px-6 lg:h-18 lg:max-w-page lg:px-12">
+    <div class="font-serif text-lg font-medium lg:text-xl">Личная CRM</div>
+    <div class="flex items-center lg:gap-8">
+      <a href={HOW_ANCHOR} class="hidden text-15 font-medium lg:block">Как это работает</a>
+      <AppButton variant="header" />
+    </div>
+  </div>
+</header>

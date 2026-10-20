@@ -1,0 +1,23 @@
+---
+const h2 =
+  'font-serif text-32 font-normal leading-[1.1] tracking-[-0.015em] lg:text-4xl lg:leading-[1.12]';
+const section = 'flex flex-col gap-4.5 px-6 pt-18 lg:gap-5 lg:px-0 lg:pt-0';
+const text = 'text-base leading-[1.6] text-muted lg:text-17';
+---
+
+<div class="mx-auto max-w-mobile lg:grid lg:max-w-page lg:grid-cols-2 lg:items-start lg:gap-18 lg:px-12 lg:pt-40">
+  <section class={section}>
+    <h2 class={h2}>Тот же адрес в другом браузере — те же контакты</h2>
+    <p class={text}>
+      Контакты хранятся на сервере, а не в браузере. Открой приложение по тому же адресу в другом браузере — и
+      увидишь тех же людей.
+    </p>
+  </section>
+  <section class={section}>
+    <h2 class={h2}>Не для продаж</h2>
+    <p class={text}>
+      Личная CRM — не про продажи. Она нужна, чтобы не терять людей, которых ты знаешь лично, и контекст общения с
+      ними.
+    </p>
+  </section>
+</div>

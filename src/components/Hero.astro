@@ -1,0 +1,30 @@
+---
+import { HOW_ANCHOR, contacts } from '../data/landing';
+import AppButton from './AppButton.astro';
+import ContactsMock from './ContactsMock.astro';
+import Section from './Section.astro';
+---
+
+<Section class="pt-8 lg:grid lg:grid-cols-2 lg:items-center lg:gap-18 lg:pt-24">
+  <div class="flex flex-col gap-5 lg:gap-7">
+    <h1
+      class="font-serif text-42 leading-[1.06] font-normal tracking-[-0.02em] lg:text-68 lg:leading-[1.02] lg:tracking-[-0.025em]"
+    >
+      Помни, кто есть кто и <em class="text-accent italic">о чём договорились</em>
+    </h1>
+    <p class="text-base leading-[1.55] text-muted lg:max-w-lead lg:text-19">
+      Личная CRM хранит контакты людей, которых ты знаешь лично: кто это, откуда знакомы, телефон, почту и о чём
+      договорились.
+    </p>
+    <div class="mt-1 flex flex-wrap items-center gap-5 lg:mt-2 lg:gap-7">
+      <AppButton />
+      <a
+        href={HOW_ANCHOR}
+        class="text-15 font-medium underline decoration-underline underline-offset-4 lg:text-base lg:underline-offset-5"
+      >
+        Как это работает
+      </a>
+    </div>
+  </div>
+  <ContactsMock rows={contacts} />
+</Section>

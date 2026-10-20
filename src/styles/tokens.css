@@ -1,0 +1,71 @@
+/*
+ * Design tokens: the only place for colors, fonts, font sizes and spacing.
+ * Everything else in the project refers to these names via Tailwind classes.
+ */
+@theme {
+  /* Spacing: 1 step = 4px (p-4 = 16px, gap-4.5 = 18px) */
+  --spacing: 0.25rem;
+
+  /* Breakpoint: switch to the desktop layout at 896px */
+  --breakpoint-lg: 56rem;
+
+  /* Fonts */
+  --font-serif: "Literata Variable", "Literata", Georgia, serif;
+  --font-sans: "Commissioner Variable", "Commissioner", system-ui, sans-serif;
+
+  /* Font sizes (px, as in the mockups) */
+  --text-*: initial;
+  --text-xs: 12px;
+  --text-13: 13px;
+  --text-sm: 14px;
+  --text-15: 15px;
+  --text-base: 16px;
+  --text-17: 17px;
+  --text-lg: 18px;
+  --text-19: 19px;
+  --text-xl: 20px;
+  --text-22: 22px;
+  --text-2xl: 24px;
+  --text-26: 26px;
+  --text-3xl: 30px;
+  --text-32: 32px;
+  --text-4xl: 36px;
+  --text-42: 42px;
+  --text-5xl: 48px;
+  --text-56: 56px;
+  --text-68: 68px;
+
+  /* Colors (the default Tailwind palette is switched off on purpose) */
+  --color-*: initial;
+  --color-paper: #f3eee5;
+  --color-surface: #fbf8f2;
+  --color-field: #f8f4ec;
+  --color-input: #ffffff;
+  --color-ink: #231e18;
+  --color-muted: #5e554a;
+  --color-subtle: #7c7264;
+  --color-placeholder: #958a7a;
+  --color-line: #ddd4c5;
+  --color-line-soft: #e3dbcd;
+  --color-line-input: #d3c9b8;
+  --color-underline: #b8ad9c;
+  --color-accent: oklch(0.48 0.13 255);
+  --color-on-accent: #ffffff;
+  --color-accent-on-dark: oklch(0.72 0.12 255);
+  --color-on-dark-muted: #cfc6b8;
+  --color-on-accent-dark: #14110d;
+
+  /* Radii */
+  --radius-control: 4px;
+  --radius-card: 6px;
+
+  /* Shadow */
+  --shadow-card: 0 30px 60px -40px rgba(40, 30, 15, 0.35);
+
+  /* Content widths */
+  --container-mobile: 430px;
+  /* 1200px of content + 2 x 48px of side padding (the mockup measures content, not the box) */
+  --container-page: 1296px;
+  --container-lead: 520px;
+  --container-cta: 640px;
+}

@@ -1,0 +1,23 @@
+---
+import '@fontsource-variable/commissioner/index.css';
+import '@fontsource-variable/literata/opsz.css';
+import '@fontsource-variable/literata/opsz-italic.css';
+import '../styles/global.css';
+
+const title = 'Личная CRM — контакты людей, которых знаешь лично';
+const description =
+  'Записывай, кто это, откуда знакомы и о чём договорились. Контакты людей, которых знаешь лично, и заметки после разговоров — в одном месте.';
+---
+
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

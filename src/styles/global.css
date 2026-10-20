@@ -1,0 +1,29 @@
+@import "tailwindcss";
+@import "./tokens.css";
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    line-height: normal;
+  }
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  h1,
+  h2 {
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  a:hover {
+    opacity: 0.8;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+}

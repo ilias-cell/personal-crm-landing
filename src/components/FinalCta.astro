@@ -1,0 +1,19 @@
+---
+import AppButton from './AppButton.astro';
+---
+
+<section class="mt-20 bg-ink text-paper lg:mt-40">
+  <div
+    class="mx-auto flex max-w-mobile flex-col gap-4.5 px-6 py-14 lg:max-w-page lg:flex-row lg:flex-wrap lg:items-end lg:justify-between lg:gap-10 lg:px-12 lg:py-28"
+  >
+    <div class="flex flex-col gap-4.5 lg:max-w-cta lg:gap-5">
+      <h2 class="font-serif text-4xl leading-[1.08] font-normal tracking-[-0.02em] lg:text-56 lg:leading-[1.04]">
+        Добавь первого человека
+      </h2>
+      <p class="text-base leading-[1.55] text-on-dark-muted lg:text-19">
+        Открой приложение и запиши, кто это и откуда вы знакомы.
+      </p>
+    </div>
+    <AppButton variant="on-dark" class="mt-2 lg:mt-0" />
+  </div>
+</section>

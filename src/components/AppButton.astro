@@ -1,0 +1,22 @@
+---
+import { APP_URL } from '../data/landing';
+
+interface Props {
+  variant?: 'primary' | 'on-dark' | 'header';
+  class?: string;
+}
+
+const { variant = 'primary', class: className } = Astro.props;
+
+const variants = {
+  primary:
+    'inline-flex h-13 items-center rounded-control bg-accent px-5.5 text-base font-medium text-on-accent lg:h-14 lg:px-7 lg:text-17',
+  'on-dark':
+    'flex h-14 w-full items-center justify-center rounded-control bg-accent-on-dark text-base font-semibold text-on-accent-dark lg:h-15 lg:w-auto lg:px-8 lg:text-17',
+  // a plain text link on mobile, a button on desktop
+  header:
+    'text-13 font-medium text-accent lg:flex lg:h-10 lg:items-center lg:rounded-control lg:bg-accent lg:px-4 lg:text-sm lg:text-on-accent',
+};
+---
+
+<a href={APP_URL} class:list={[variants[variant], className]}>Открыть приложение</a>
