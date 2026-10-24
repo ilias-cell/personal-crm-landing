@@ -1,0 +1,86 @@
+name: Deploy
+
+# Push to main -> the site is built here in CI -> dist/ is copied to the server with rsync -> the live site is checked.
+# Nothing is built on the server: it only receives the finished files.
+on:
+  push:
+    branches: [main]
+
+# Two deploys must never run at once; a newer one waits instead of cancelling a running one.
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+env:
+  SITE_URL: https://therooks.ru
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+
+      # pnpm of the exact version pinned in package.json ("packageManager")
+      - uses: pnpm/action-setup@v6
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm build
+
+      # The commit SHA next to the site lets the check below tell the new version from the old one:
+      # a plain 200 from the main page would also come from the previous deploy.
+      - name: Mark the build with the commit SHA
+        run: |
+          test -f dist/index.html
+          printf '%s\n' "$GITHUB_SHA" > dist/version.txt
+
+      - name: Prepare ssh
+        env:
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_KNOWN_HOSTS: ${{ vars.DEPLOY_KNOWN_HOSTS }}
+          DEPLOY_HOST: ${{ vars.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ vars.DEPLOY_USER }}
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          cat > ~/.ssh/config <<EOF
+          Host server
+            HostName $DEPLOY_HOST
+            User $DEPLOY_USER
+            IdentityFile ~/.ssh/deploy_key
+            IdentitiesOnly yes
+            StrictHostKeyChecking yes
+          EOF
+
+      # On the server this key can only run rrsync limited to /var/www/landing (no shell, no other folders),
+      # so "server:./" is the landing folder. --delete removes files that are no longer in the build.
+      - name: Upload to the server
+        run: rsync -rlt --delete --itemize-changes dist/ server:./
+
+      - name: Check the live site
+        run: |
+          deadline=$((SECONDS + 60))
+          while true; do
+            status=$(curl -s -o /dev/null -w '%{http_code}' --max-time 5 "$SITE_URL/" || true)
+            version=$(curl -s --max-time 5 "$SITE_URL/version.txt" || true)
+            if [ "$status" = 200 ] && [ "$version" = "$GITHUB_SHA" ]; then
+              echo "Smoke test passed: $SITE_URL answered 200 and serves commit $GITHUB_SHA"
+              exit 0
+            fi
+            if [ "$SECONDS" -ge "$deadline" ]; then
+              echo "Smoke test FAILED: main page answered '$status', version.txt says '${version:0:80}', expected $GITHUB_SHA" >&2
+              exit 1
+            fi
+            sleep 2
+          done
